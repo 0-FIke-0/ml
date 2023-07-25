@@ -3,5 +3,5 @@
 #https://habr.com/ru/articles/207160/
 # Json: https://www.geeksforgeeks.org/read-json-file-using-python/
 # read_csv: check separator
-# Clusterization: https://habr.com/ru/articles/653443/
+# Clusterization
 #Catboost: https://habr.com/ru/companies/otus/articles/527554/
