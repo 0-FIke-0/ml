@@ -1,0 +1,5 @@
+# Обязательно: проверка на выбросы, проверка на дубликаты(drop_duplicates), заполнить пропуски
+# Заполнить пропуски:
+#https://scikit-learn.org/stable/modules/generated/sklearn.impute.SimpleImputer.html
+#Проверка на выбросы:
+#https://proglib.io/p/moem-dataset-rukovodstvo-po-ochistke-dannyh-v-python-2020-03-27
