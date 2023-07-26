@@ -3,3 +3,11 @@
 #https://scikit-learn.org/stable/modules/generated/sklearn.impute.SimpleImputer.html
 #Проверка на выбросы:
 #https://proglib.io/p/moem-dataset-rukovodstvo-po-ochistke-dannyh-v-python-2020-03-27
+
+
+
+#Для того, чтобы рассчитать ROI, надо доход от вложение(Revenue) групбайнуть по каналам и вычесть групбайнутый costs по компаниям, разделить на групбайнутый costs по компаниям и *100%
+(all_data[["Revenue", "Channel"]].groupby("Channel").sum()-all_data[["costs", "Channel"]].groupby("Channel")).sum()/all_data[["costs", "Channel"]].groupby("Channel").sum()*100%
+
+#Для того,чтобы рассчитать LTV, надо из дохода от вложения(Revenue) групбай по клиентам отнять средний расход на клиента, который расчитывается групбай по первым сессиям и разделить на кол-во клиентов
+all_data[["Revenue", "user_id"]].groupby(user_id).sum() - (all_data["costs"] / all_data[["first_sess_date"]].groupby("first_sess_date").count())
