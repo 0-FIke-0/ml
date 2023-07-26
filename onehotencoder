@@ -5,4 +5,7 @@ transformer = make_column_transformer((OneHotEncoder(), col_obj), remainder="pas
 transformed = transformer.fit_transform(data)
 transformed_data = pd.DataFrame(transformed, columns=transformer.get_feature_names_out())
 transformed_data
+#Когда уже необходимо предсказывать, нужно заранее сохранить transformer:
+data_for_pred = pd.DataFrame(transformer.transform(data), columns=transformer.get_feature_names_out())
 #https://datagy.io/sklearn-one-hot-encode/
+#https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html
