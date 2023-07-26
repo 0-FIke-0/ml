@@ -1,0 +1,49 @@
+import pandas as pd
+data = pd.read_csv("BankChurners.csv")
+data.drop(columns=["CLIENTNUM", "Naive_Bayes_Classifier_Attrition_Flag_Card_Category_Contacts_Count_12_mon_Dependent_count_Education_Level_Months_Inactive_12_mon_1", "Naive_Bayes_Classifier_Attrition_Flag_Card_Category_Contacts_Count_12_mon_Dependent_count_Education_Level_Months_Inactive_12_mon_2"], inplace=True)
+
+
+data_for_train = data[:round(len(data)*0.8)]
+data_for_test = data[round(len(data)*0.8):]
+
+
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import make_column_transformer
+col_obj = [data_for_train.columns.values[i] for i in range(len(data_for_train.dtypes)) if data_for_train.dtypes[i] == 'object']
+transformer = make_column_transformer((OneHotEncoder(), col_obj), remainder="passthrough")
+transformed = transformer.fit_transform(data_for_train)
+transformed_data = pd.DataFrame(transformed, columns=transformer.get_feature_names_out())
+transformed_data
+
+
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+import numpy as np
+aim = "remainder__Avg_Open_To_Buy"
+reg = LinearRegression().fit(transformed_data.drop(columns=["remainder__Avg_Open_To_Buy"]), transformed_data["remainder__Avg_Open_To_Buy"])
+transformed_data_for_test = pd.DataFrame(transformer.transform(data_for_test), columns=transformer.get_feature_names_out())
+np.sqrt(mean_squared_error(transformed_data_for_test["remainder__Avg_Open_To_Buy"], reg.predict(transformed_data_for_test.drop(columns=["remainder__Avg_Open_To_Buy"]))))
+
+
+
+import lightgbm as lgbm
+from sklearn.metrics import mean_squared_error
+train = lgbm.Dataset(transformed_data.drop(columns=[aim]), transformed_data[aim])
+eval = lgbm.Dataset(transformed_data_for_test.drop(columns=[aim]), transformed_data_for_test[aim], reference=train)
+params = {
+    'task': 'train', 
+    'boosting': 'gbdt',
+    'objective': 'regression',
+    'num_leaves': 15,
+    'learnnig_rage': 0.5,
+    'metric': {'l1'},
+    'verbose': -1
+}
+model = lgbm.train(params=params, train_set=train, valid_sets=eval)
+np.sqrt(mean_squared_error(transformed_data_for_test[aim], model.predict(transformed_data_for_test.drop(columns=[aim]))))
+
+
+import xgboost as xgb
+xgb_model = xgb.XGBRegressor(objective="reg:linear", random_state=42)
+xgb_model.fit(transformed_data.drop(columns=[aim]), transformed_data[aim])
+np.sqrt(mean_squared_error(transformed_data_for_test[aim], xgb_model.predict(transformed_data_for_test.drop(columns=[aim]))))
