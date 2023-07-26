@@ -1,0 +1,8 @@
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import make_column_transformer
+col_obj = [data.columns.values[i] for i in range(len(data.dtypes)) if data.dtypes[i] == 'object']
+transformer = make_column_transformer((OneHotEncoder(), col_obj), remainder="passthrough")
+transformed = transformer.fit_transform(data)
+transformed_data = pd.DataFrame(transformed, columns=transformer.get_feature_names_out())
+transformed_data
+#https://datagy.io/sklearn-one-hot-encode/
