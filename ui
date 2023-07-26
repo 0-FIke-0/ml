@@ -1,0 +1,31 @@
+import sys
+from PyQt5.QtWidgets import QWidget, QMessageBox, QApplication, QMainWindow
+from qtpy import uic
+import traceback
+from joblib import dump, load
+import pandas as pd
+import numpy as np
+i
+class Example(QMainWindow):
+
+    def __init__(self):
+        super().__init__()
+        uic.loadUi("untitled.ui", self)
+        self.lineEdit_2.setEnabled(False)
+        self.pushButton.clicked.connect(self.click)
+
+
+
+
+def excepthook(exc_type, exc_value, exc_tb):
+    tb = "".join(traceback.format_exception(exc_type, exc_value, exc_tb))
+    print("Oбнаружена ошибка !:", tb)
+
+
+sys.excepthook = excepthook
+if __name__ == '__main__':
+
+    app = QApplication(sys.argv)
+    ex = Example()
+    ex.show()
+    sys.exit(app.exec_())
