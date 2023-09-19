@@ -1,0 +1,17 @@
+from sklearn.model_selection import train_test_split
+reg = CatBoostRegressor(
+    iterations=100000,
+    use_best_model=True,
+    early_stopping_rounds=50,
+    l2_leaf_reg=5,
+    depth=13,
+    task_type='CPU',
+    colsample_bylevel=0.7,
+    leaf_estimation_method='Gradient',
+    random_seed=42,
+    bootstrap_type='Bernoulli',
+    grow_policy='Depthwise'
+)
+
+x_train, x_test, y_train, y_test = train_test_split(train.drop(columns=["Energy city"]), train["Energy city"], test_size=0.2)
+reg.fit(x_train, y_train, eval_set=(x_test, y_test), verbose=50)
