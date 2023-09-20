@@ -6,3 +6,7 @@
 # Segmentation: https://in-scale.ru/blog/rfm-analiz/
 #Catboost: https://habr.com/ru/companies/otus/articles/527554/
 для гиперпараметров gridsearchcv sklearn
+
+
+shutil.copy move
+wget
