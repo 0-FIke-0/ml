@@ -14,3 +14,9 @@ wget
 # https://stackoverflow.com/questions/39441935/how-to-get-x-y-position-of-contours-in-python-opencvhttps://stackoverflow.com/questions/39441935/how-to-get-x-y-position-of-contours-in-python-opencv
 
 cv2.threshold() or cvtColor()
+
+
+# https://docs.ultralytics.com/tasks/segment/#train
+
+# https://docs.ultralytics.com/datasets/segment/
+
