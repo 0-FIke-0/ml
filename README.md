@@ -11,3 +11,6 @@
 shutil.copy move
 wget
 #https://docs.ultralytics.com/tasks/classify/#val
+# https://stackoverflow.com/questions/39441935/how-to-get-x-y-position-of-contours-in-python-opencvhttps://stackoverflow.com/questions/39441935/how-to-get-x-y-position-of-contours-in-python-opencv
+
+cv2.threshold() or cvtColor()
