@@ -10,3 +10,4 @@
 
 shutil.copy move
 wget
+#https://docs.ultralytics.com/tasks/classify/#val
