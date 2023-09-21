@@ -20,3 +20,13 @@ cv2.threshold() or cvtColor()
 
 # https://docs.ultralytics.com/datasets/segment/
 
+
+# model.train(......args..... save_dir='ПАПКА СОХРАНЕНИЯ')
+
+
+# в папке сохранения будет папка weights
+
+
+# в weights будет best.pt
+
+model = Yolo("best.pt"
