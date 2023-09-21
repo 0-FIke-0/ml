@@ -1,0 +1,33 @@
+import sys
+from PyQt5.QtWidgets import QWidget, QMessageBox, QApplication, QMainWindow
+import pickle
+from qtpy import uic
+import catboost
+import traceback
+
+
+class Example(QMainWindow):
+
+    def __init__(self):
+        super().__init__()
+        uic.loadUi("untitled.ui", self)
+        self.lineEdit_2.setEnabled(False)
+        self.pushButton.clicked.connect(self.click)
+
+    def click(self):
+        if 
+        self.lineEdit.setText("")
+
+
+def excepthook(exc_type, exc_value, exc_tb):
+    tb = "".join(traceback.format_exception(exc_type, exc_value, exc_tb))
+    print("Oбнаружена ошибка !:", tb)
+
+
+sys.excepthook = excepthook
+if __name__ == '__main__':
+
+    app = QApplication(sys.argv)
+    ex = Example()
+    ex.show()
+    sys.exit(app.exec_())
